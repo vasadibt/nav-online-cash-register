@@ -1,0 +1,20 @@
+{
+  "name": "vasadibt/nav-online-cash-register",
+  "description": "A PHP interface for Online Cash Register Data Reporting of Hungarian Tax Office (NAV)",
+  "license": "MIT",
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-curl": "*",
+    "ext-dom": "*",
+    "ext-libxml": "*",
+    "ext-openssl": "*",
+    "ext-simplexml": "*",
+    "ext-zip": "*",
+    "guzzlehttp/guzzle": "7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NavOnlineCashRegister\\": "src"
+    }
+  }
+}

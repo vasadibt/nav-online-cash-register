@@ -1,0 +1,7 @@
+/.htaccess
+/vendor
+/navdocs
+/tests/testdata/userData.real.json
+/.idea
+/examples/config.php
+/composer.phar
