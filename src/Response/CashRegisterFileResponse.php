@@ -43,11 +43,12 @@ class CashRegisterFileResponse extends AbstractResponse
             $handle = fopen($tempFile, 'w');
             fwrite($handle, $rawData->getContent());
             fclose($handle);
-            $p7bFiles = static::getZipFilesContents($tempFile);
+            $p7bFilesContents = static::getZipFilesContents($tempFile);
             unlink($tempFile);
 
-            foreach ($p7bFiles as $p7bFile) {
-                if (preg_match('/<\?xml.*<\/ROWS>/', $p7bFile, $match)) {
+            foreach ($p7bFilesContents as $fileContent) {
+                $cleanContent = str_replace(["\n", "\r"], '', $fileContent);
+                if (preg_match('/<\?xml.*<\/ROWS>/', $cleanContent, $match)) {
                     $xmlObjects [] = simplexml_load_string($match[0]);
                 }
             }
