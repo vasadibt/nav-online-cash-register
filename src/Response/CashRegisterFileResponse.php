@@ -39,7 +39,7 @@ class CashRegisterFileResponse extends AbstractResponse
         $response = new static();
         $xmlObjects = [];
         foreach ($baseResponse->getRawData() as $rawData) {
-            $tempFile = tempnam(__DIR__ . '/../tmp', 'raw');
+            $tempFile = tempnam(sys_get_temp_dir(), 'raw');
             $handle = fopen($tempFile, 'w');
             fwrite($handle, $rawData->getContent());
             fclose($handle);
@@ -68,13 +68,14 @@ class CashRegisterFileResponse extends AbstractResponse
         $contents = [];
 
         $zip = new ZipArchive();
-
-        $zip->open($fileName);
-        for ($i = 0; $i < $zip->numFiles; $i++) {
-            $stat = $zip->statIndex($i);
-            $contents [$stat['name']] = stream_get_contents($zip->getStream($stat['name']));
+        $res = $zip->open($fileName);
+        if ($res === TRUE) {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $stat = $zip->statIndex($i);
+                $contents [$stat['name']] = stream_get_contents($zip->getStream($stat['name']));
+            }
+            $zip->close();
         }
-        $zip->close();
 
         return $contents;
     }
