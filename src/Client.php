@@ -134,8 +134,11 @@ class Client extends AbstractModel
             $rawDataItems->append($rawData);
         }
 
+        $responseXmlString = preg_replace('/[\x00-\x1F\x7F]/', '', $responseXmlString);
+        $responseXml = simplexml_load_string($responseXmlString);
+        
         $result = new Response();
-        $result->setXml(simplexml_load_string($responseXmlString)->Body->children()[0]);
+        $result->setXml($responseXml->Body->children()[0]);
         $result->setRawData($rawDataItems);
         return $result;
     }
