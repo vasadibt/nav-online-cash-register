@@ -49,6 +49,7 @@ class CashRegisterFileResponse extends AbstractResponse
             foreach ($p7bFilesContents as $fileContent) {
                 $cleanContent = str_replace(["\n", "\r"], '', $fileContent);
                 if (preg_match('/<\?xml.*<\/ROWS>/', $cleanContent, $match)) {
+                    $match[0] = str_replace('xmlns:schemaLocation', 'xsi:schemaLocation', $match[0]);
                     $xmlObjects [] = simplexml_load_string($match[0]);
                 }
             }
