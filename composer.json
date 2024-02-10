@@ -10,7 +10,7 @@
     "ext-openssl": "*",
     "ext-simplexml": "*",
     "ext-zip": "*",
-    "guzzlehttp/guzzle": "7.0"
+    "guzzlehttp/guzzle": "^7.5"
   },
   "autoload": {
     "psr-4": {
